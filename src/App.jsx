@@ -2,30 +2,60 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [change, setChange] = useState(' Exemplo de alteração')
-  const mudancaDeTexto = (e) => {
-    setChange(e.target.value)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const mudancaDeEmail = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const mudancaDeSenha = (e) => {
+    setPassword(e.target.value)
+  }
+
+  const enviarForms = (e) => {
+    e.preventDefault()
+    console.log(`Email: ${email}, Senha: ${password}`)
   }
   return (
     <>
-      <div>
-        <h1>Escreva seus dados</h1>
-        {/* <p>{change}</p>
-        <label htmlFor="id">texto</label>
-        <input type='text' id='id' onChange={(e) => mudancaDeTexto(e)} /> */}
-      </div>
+      <section>
+        <h2>Cadasatro de Usuário</h2>
+        <div>
+          <form onSubmit={enviarForms}> 
+            <label htmlFor="email">email</label>
+            <input
+              id='email'
+              type='email'
+              name='email'
+              value={email}
+              onChange={(e) => mudancaDeEmail(e)}
+              />
 
-      <fieldset>
+            <label htmlFor="password">senha</label>
+            <input
+              id='password'
+              type='password'
+              name='senha'
+              value={password}
+              onChange={(e) => mudancaDeSenha(e)}
+              />
+              <button type='submit'>Enviar informações</button>
+          </form>
+        </div>
+      </section>
+       {/*<fieldset>
         <legend>Nome</legend>
         <label htmlFor="1"></label>
         <input type="text" id='1' name='nome' />
       </fieldset>
       
-      <fieldset>
+       <fieldset>
         <legend>Idade</legend>
         <label htmlFor="2"></label>
-        <input type="number" id='2' name='idade' />
+        <input 
+        type="number"
+        id='2'
+        name='idade' />
       </fieldset>
       
       <fieldset>
@@ -108,7 +138,7 @@ function App() {
         <input type="text" id='13' name='time' />
       </fieldset>
       
-      <button>Enviar informações</button>
+       */}
     </>
   )
 }
