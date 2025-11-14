@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import './App.css'
 
 function App() {
@@ -19,7 +19,44 @@ function App() {
   const [bibleVerse, setVerse] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const [isUser, setIsUser] = useState(true)
+  
+  const onSubmitform = () => {
+    const body = {
+      // chave: valor,
+      name,
+      age,
+      phone,
+      instagram,
+      github,
+      thought,
+      problem,
+      lastSeries,
+      lastGame,
+      music,
+      genre,
+      specialSkill,
+      specialPower,
+      favoriteTeam,
+      bibleVerse,
+      email,
+      password
+    }
+    fetch('https://www.api.alanleiser.com/', {
+      method: "POST",
+      body: JSON.stringify(body)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+        if (err.status === 400) {
+          setIsUser(true)
+        }
+      })
+  }
 
   const mudancaDeNome = (e) => {
     setName(e.target.value)
@@ -69,37 +106,36 @@ function App() {
   const mudancaDeEmail = (e) => {
     setEmail(e.target.value);
   }
-
   const mudancaDeSenha = (e) => {
     setPassword(e.target.value)
   }
 
-  const enviarForms = (e) => {
-    e.preventDefault()
-    fetch('https://www.api.alanleiser.com/', {
-      method: 'POST',
-      body: JSON.stringify()
-    })
-  }
-  console.log(`
-  Nome: ${name},
-  Idade: ${age},
-  Telefone: ${phone},
-  Instagram: ${instagram},
-  Github: ${github},
-  Pensamento: ${thought},
-  Problema: ${problem},
-  Última série: ${lastSeries},
-  Último jogo: ${lastGame},
-  Música: ${music},
-  Gênero musical: ${genre},
-  Habilidade Especial: ${specialSkill},
-  Poder especial: ${specialPower},
-  Time favorito: ${favoriteTeam},
-  Verso da Bíblia: ${bibleVerse},
-  Email: ${email},
-  Senha: ${password}
-  `)
+  // const enviarForms = (e) => {
+  //   e.preventDefault()
+  //     fetch('https://www.api.alanleiser.com/', {
+  //     method: 'POST',
+  //     body: JSON.stringify()
+  //   })
+  // }
+  // console.log(`
+  // Nome: ${name},
+  // Idade: ${age},
+  // Telefone: ${phone},
+  // Instagram: ${instagram},
+  // Github: ${github},
+  // Pensamento: ${thought},
+  // Problema: ${problem},
+  // Última série: ${lastSeries},
+  // Último jogo: ${lastGame},
+  // Música: ${music},
+  // Gênero musical: ${genre},
+  // Habilidade Especial: ${specialSkill},
+  // Poder especial: ${specialPower},
+  // Time favorito: ${favoriteTeam},
+  // Verso da Bíblia: ${bibleVerse},
+  // Email: ${email},
+  // Senha: ${password}
+  // `)
 
   // useEffect(() => {
   //   fetch('https://www.api.alanleiser.com/')
@@ -109,10 +145,11 @@ function App() {
 
   return (
     <>
-      <section>
+      <div className="container">
         <h2>Cadasatro de Usuário</h2>
-        <div className='container'>
-          <form onSubmit={enviarForms}>
+        <form onSubmit={onSubmitform}>
+
+          <div className='nome'>
             <label htmlFor="name">nome</label>
             <input
               id='name'
@@ -121,6 +158,9 @@ function App() {
               value={name}
               onChange={(e) => mudancaDeNome(e)}
             />
+          </div>
+
+          <div className="idade">
             <label htmlFor="age">idade</label>
             <input
               id='age'
@@ -129,6 +169,9 @@ function App() {
               value={age}
               onChange={(e) => mudancaDeIdade(e)}
             />
+          </div>
+
+          <div className="cell">
             <label htmlFor="telephone">telefone</label>
             <input
               id='telephone'
@@ -137,6 +180,9 @@ function App() {
               value={phone}
               onChange={(e) => mudancaDeTelefone(e)}
             />
+          </div>
+
+          <div className="insta">
             <label htmlFor="instagram">instagram</label>
             <input
               id='instagram'
@@ -145,6 +191,9 @@ function App() {
               value={instagram}
               onChange={(e) => mudancaDePerfil(e)}
             />
+          </div>
+
+          <div className="github">
             <label htmlFor="github">github</label>
             <input
               id='github'
@@ -153,6 +202,9 @@ function App() {
               value={github}
               onChange={(e) => mudancaDeUsuario(e)}
             />
+          </div>
+
+          <div className="pensamento">
             <label htmlFor="thought">pensamento</label>
             <input
               id='thought'
@@ -161,6 +213,9 @@ function App() {
               value={thought}
               onChange={(e) => mudancaDePensamento(e)}
             />
+          </div>
+
+          <div className="problema">
             <label htmlFor="problem">problema</label>
             <input
               id='problem'
@@ -169,6 +224,9 @@ function App() {
               value={problem}
               onChange={(e) => mudancaDeProblema(e)}
             />
+          </div>
+
+          <div className="serie">
             <label htmlFor="serie">ultima serie</label>
             <input
               id='serie'
@@ -177,6 +235,9 @@ function App() {
               value={lastSeries}
               onChange={(e) => mudancaDeSerie(e)}
             />
+          </div>
+
+          <div className="jogo">
             <label htmlFor="game">ultimo jogo</label>
             <input
               id='game'
@@ -185,6 +246,9 @@ function App() {
               value={lastGame}
               onChange={(e) => mudancaDeJogo(e)}
             />
+          </div>
+
+          <div className="musica">
             <label htmlFor="music">ultima musica</label>
             <input
               id='music'
@@ -193,6 +257,9 @@ function App() {
               value={music}
               onChange={(e) => mudancaDeMusica(e)}
             />
+          </div>
+
+          <div className="genero">
             <label htmlFor="gender">genero</label>
             <input
               id='gender'
@@ -201,6 +268,9 @@ function App() {
               value={genre}
               onChange={(e) => mudancaDeGenero(e)}
             />
+          </div>
+
+          <div className="habilidade">
             <label htmlFor="ability">habilidade especial</label>
             <input
               id='ability'
@@ -209,6 +279,9 @@ function App() {
               value={specialSkill}
               onChange={(e) => mudancaDeHabilidade(e)}
             />
+          </div>
+
+          <div className="poder">
             <label htmlFor="power">poder especial</label>
             <input
               id='power'
@@ -217,6 +290,9 @@ function App() {
               value={specialPower}
               onChange={(e) => mudancaDePoder(e)}
             />
+          </div>
+
+          <div className="time">
             <label htmlFor="team">time favorito</label>
             <input
               id='team'
@@ -225,14 +301,18 @@ function App() {
               value={favoriteTeam}
               onChange={(e) => mudancaDeTime(e)}
             />
-            <label htmlFor="verse">verso favorito da biblia</label>
-            <input
-              id='verse'
-              type='text'
-              name='versoBiblia'
-              value={bibleVerse}
-              onChange={(e) => mudancaDeVerso(e)}
-            />
+          </div>
+
+          <label htmlFor="verse">verso favorito da biblia</label>
+          <input
+            id='verse'
+            type='text'
+            name='versoBiblia'
+            value={bibleVerse}
+            onChange={(e) => mudancaDeVerso(e)}
+          />
+
+          <div className="email">
             <label htmlFor="email">email</label>
             <input
               id='email'
@@ -241,19 +321,19 @@ function App() {
               value={email}
               onChange={(e) => mudancaDeEmail(e)}
             />
+          </div>
 
-            <label htmlFor="password">senha</label>
-            <input
-              id='password'
-              type='password'
-              name='senha'
-              value={password}
-              onChange={(e) => mudancaDeSenha(e)}
-            />
-            <button type='submit'>Enviar informações</button>
-          </form>
-        </div>
-      </section>
+          <label htmlFor="password">senha</label>
+          <input
+            id='password'
+            type='password'
+            name='senha'
+            value={password}
+            onChange={(e) => mudancaDeSenha(e)}
+          />
+          <button type='submit'>Enviar informações</button>
+        </form>
+      </div>
     </>
   )
 }
